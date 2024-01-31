@@ -38,29 +38,6 @@ class WelcomeController extends Controller
     $recipe->delete();
     return redirect()->back();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public function update_recipe($id){
         $data = Recipe::find($id);
 
@@ -77,8 +54,44 @@ class WelcomeController extends Controller
             $request->image->move('img',$imagename);
             $data->image=$imagename;
         }
+        dd($data);
+
         $data->save();
 
         return redirect()->back();
     }
+    public function search(Request $request)
+    {
+        $searchParam = $request->query('search');
+        
+       
+        $data = Recipe::where('title', 'like', "%$searchParam%")->get();
+
+        return view('recipe', compact('data', 'searchParam'));
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    

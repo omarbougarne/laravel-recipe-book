@@ -47,19 +47,36 @@
         </section>
 
         <main>
-            <form action="">
-                <div class="relative border-2 border-gray-100 m-4 rounded-lg">
-                    <div class="absolute top-4 left-3">
-                        <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+            <div class="container">
+                <form action="{{ route('recipes.search') }}">
+                    <div class="relative border-2 border-gray-100 m-4 rounded-lg">
+                        <div class="absolute top-4 left-3">
+                            <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
+                        </div>
+                        <input type="text"name="search"class="h-14 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"/>
+                        <div class="absolute top-2 right-2">
+                            <button type="submit"class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600">
+                                Search
+                            </button>
+                        </div>
                     </div>
-                    <input type="text"name="search"class="h-14 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"placeholder="Search Laravel Gigs..."/>
-                    <div class="absolute top-2 right-2">
-                        <button type="submit"class="h-10 w-20 text-white rounded-lg bg-red-500 hover:bg-red-600" >
-                            Search
-                        </button>
+                </form>
+                @if($data->isEmpty())
+                <p>No recipes found.</p>
+                 @else
+                @foreach($data as $recipe)
+                    <div class="flex">
+                        <img class="hidden w-48 mr-6 md:block" src="img/{{ $recipe->image }}" alt="idk">
+                        <div>
+                            <h3 class="text-2xl">
+                                <a href="show.html">{{ $recipe->title }}</a>
+                            </h3>
+                            <div class="text-xl font-bold mb-4">{{ $recipe->description }}</div>
+                        </div>
                     </div>
-                </div>
-            </form>
+                    <br>
+                @endforeach
+            @endif
             <!-- Main -->
             <center>
            <a href="{{ url('/add') }}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Add Product</a>
@@ -86,50 +103,3 @@
         </footer>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- <td><a onclick="return confirm('are u sure?')"; class="btn btn-danger" href="{{url('delete_product',$data->id)}}">Delete</a></td>
-        <td><a class="btn btn-success" href="{{url('update_product',$data->id)}}">Update</a></td> -->

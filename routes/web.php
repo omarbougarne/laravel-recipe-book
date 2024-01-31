@@ -20,6 +20,8 @@ route::get('recipe', [WelcomeController::class,'show_recipe']);
 route::get('/delete/{id}', [WelcomeController::class, 'delete_recipe'])->name('delete_recipe');
 route::get('update_recipe/{id}', [WelcomeController::class,'update_recipe'])->name('update_recipe');
 route::post('edit_recipe/{id}', [WelcomeController::class,'edit_recipe']);
+Route::get('/search', [WelcomeController::class, 'search'])->name('recipes.search');
+
 
 
 
