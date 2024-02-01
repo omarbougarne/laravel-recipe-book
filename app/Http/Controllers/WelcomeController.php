@@ -69,6 +69,13 @@ class WelcomeController extends Controller
 
         return view('recipe', compact('data', 'searchParam'));
     }
+    public function detail_recipe($id){
+        $recipe = Recipe::find($id);
+        if(!$recipe){
+            return response()->view('errors.404', [], 404);
+        }
+        return view('detail', compact('recipe'));
+    }
 }
 
 

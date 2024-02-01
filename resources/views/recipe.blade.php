@@ -66,11 +66,13 @@
                  @else
                 @foreach($data as $recipe)
                     <div class="flex">
-                        <img class="hidden w-48 mr-6 md:block" src="img/{{ $recipe->image }}" alt="idk">
+                        <img class="hidden w-48 mr-6 md:block" src="img/{{$recipe->image }}" alt="idk">
                         <div>
+                            <div class="card mt-3" onclick="window.location='{{ url('detail', ['id' => $recipe->id]) }}';"style="cursor: pointer;">
                             <h3 class="text-2xl">
-                                <a href="show.html">{{ $recipe->title }}</a>
+                                <a >{{ $recipe->title }}</a>
                             </h3>
+                        </div>
                             <div class="text-xl font-bold mb-4">{{ $recipe->description }}</div>
                         </div>
                     </div>
