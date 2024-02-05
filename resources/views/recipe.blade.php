@@ -91,11 +91,13 @@
                                     <a >{{ $recipe->title }}</a>
                                 </h3>
                             </div>
-                            {{-- <div class="text-xl font-bold mb-4">{{$recipe->description}}</div>
-                            <div class="px-6 py-4">
-                                @foreach ($data as $tag)
-                                {{ $tag->name }}
-                            </div> --}}
+                            <div class="text-xl font-bold mb-4">{{$recipe->description}}</div>
+                                <div class="px-6 py-4">
+                                    @foreach ($recipe->tags as $tag)
+                                        <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{{ $tag->name }}</span>
+                                    @endforeach
+                                </div>
+                            </div>
                         </tr>
                         </div>
                     </div>

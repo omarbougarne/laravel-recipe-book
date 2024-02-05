@@ -14,7 +14,8 @@ class Recipe extends Model
     public function toSearchableArray()
     {
         return [
-            'title' => $this->title
+            'title' => $this->title,
+            'tags' => $this->tags->pluck('name')->toArray()
         ];
     }
 

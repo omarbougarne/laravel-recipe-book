@@ -88,14 +88,17 @@ public function store(Request $request)
         return redirect()->back();
     }
     public function search(Request $request)
-    {
-        $searchParam = $request->query('search');
-        
-       
-        $data = Recipe::where('title', 'like', "%$searchParam%")->get();
+{
+    $searchParam = $request->query('search');
 
-        return view('recipe', compact('data', 'searchParam'));
-    }
+    $data = Recipe::where('title', 'like', "%$searchParam%")
+                ->orWhereHas('tags', function ($query) use ($searchParam) {
+                    $query->where('name', 'like', "%$searchParam%");
+                })
+                ->get();
+
+    return view('recipe', compact('data', 'searchParam'));
+}
     public function detail_recipe($id){
         $recipe = Recipe::find($id);
         if(!$recipe){
