@@ -22,37 +22,6 @@ route::get('update_recipe/{id}', [WelcomeController::class,'update_recipe'])->na
 route::post('edit_recipe/{id}', [WelcomeController::class,'edit_recipe']);
 Route::get('/search', [WelcomeController::class, 'search'])->name('recipes.search');
 route::get('/detail/{id}', [WelcomeController::class,'detail_recipe'])->name('detail');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Route::get('/add', [WelcomeController::class, 'addtag'])->name('add_recipe');
 
 

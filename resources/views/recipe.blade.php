@@ -45,7 +45,6 @@
                 </p>
             </div>
         </section>
-
         <main>
             <div class="container">
                 <form action="{{ route('recipes.search') }}">
@@ -64,38 +63,45 @@
                 @if($data->isEmpty())
                 <p>No recipes found.</p>
                  @else
-                @foreach($data as $recipe)
+                 @foreach($data as $search)
                     <div class="flex">
-                        <img class="hidden w-48 mr-6 md:block" src="img/{{$recipe->image }}" alt="idk">
+                        <img class="hidden w-48 mr-6 md:block" src="img/{{$search->image }}" alt="idk">
                         <div>
-                            <div class="card mt-3" onclick="window.location='{{ url('detail', ['id' => $recipe->id]) }}';"style="cursor: pointer;">
+                            {{-- <div class="card mt-3" onclick="window.location='{{ url('detail', ['id' => $data->id]) }}';"style="cursor: pointer;"> --}}
                             <h3 class="text-2xl">
-                                <a >{{ $recipe->title }}</a>
+                                <a >{{ $search->title }}</a>
                             </h3>
-                        </div>
-                            <div class="text-xl font-bold mb-4">{{ $recipe->description }}</div>
+                        {{-- </div> --}}
+                            <div class="text-xl font-bold mb-4">{{ $search->description }}</div>
                         </div>
                     </div>
                     <br>
-                @endforeach
+                    @endforeach
             @endif
             <!-- Main -->
             <center>
            <a href="{{ url('/add') }}" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">Add Product</a>
             </center>
-            @foreach($data as $data)
+            @foreach($data as $recipe)
                     <div class="flex">
-                        <img class="hidden w-48 mr-6 md:block" src="img/{{$data->image}}" alt="idk">
+                        <img class="hidden w-48 mr-6 md:block" src="img/{{$recipe->image}}" alt="idk">
                         <div>
-                            <h3 class="text-2xl">
-                                <a href="show.html">{{$data->title}}</a>
-                            </h3>
-                            <div class="text-xl font-bold mb-4">{{$data->description}}</div>
+                            <div class="card mt-3" onclick="window.location='{{ url('detail', ['id' => $recipe->id]) }}';"style="cursor: pointer;">
+                                <h3 class="text-2xl">
+                                    <a >{{ $recipe->title }}</a>
+                                </h3>
+                            </div>
+                            {{-- <div class="text-xl font-bold mb-4">{{$recipe->description}}</div>
+                            <div class="px-6 py-4">
+                                @foreach ($data as $tag)
+                                {{ $tag->name }}
+                            </div> --}}
+                        </tr>
                         </div>
                     </div>
                     <div class="flex justify-center mt-4">
-                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" href="{{ route('update_recipe',['id'=>$data->id])}}">Update</a>
-                    <a  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="{{ route('delete_recipe',['id'=>$data->id]) }}">Delete</a>
+                    <a class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" href="{{ route('update_recipe',['id'=>$recipe->id])}}">Update</a>
+                    <a  class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" href="{{ route('delete_recipe',['id'=>$recipe->id]) }}">Delete</a>
                     </div>
                     <br>
                 @endforeach

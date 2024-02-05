@@ -37,11 +37,19 @@
                 <label for="image" class="block text-gray-700">Recipe Image</label>
                 <input type="file" name="image" id="image" class="form-input mt-1 block w-full">
             </div>
+            <div class="mb-4">
+                <label for="tags" class="block text-gray-700">Tags</label>
+                <select name="tags[]" id="tags" multiple class="form-multiselect block w-full">
+                    @foreach($tags as $tag)
+                    <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
+            </div>
             <div class="flex justify-center">
             <input type="submit" value="Add Product" class="bg-orange-500 text-white hover:bg-orange-600 px-4 py-2 rounded-md">
             </div>
+            
         </form>
     </div>
 </body>
-
 </html>

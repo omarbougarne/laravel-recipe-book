@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Recipe;
+use App\Models\tags;
 
 class WelcomeController extends Controller
 {
@@ -13,9 +14,15 @@ class WelcomeController extends Controller
         return view('recipe',compact('data'));
     }
     public function showAddForm()
-    {
-        return view('add');
-    }
+{
+    $tags = $this->showtags(); 
+    return view('add', ['tags' => $tags]);
+}
+public function showtags()
+{
+    $tags = tags::all(); 
+    return $tags; 
+}
     public function add_recipe(Request $request){
         $data = new Recipe;
         $data->title = $request->title;
@@ -26,11 +33,32 @@ class WelcomeController extends Controller
         $request->image->move('img',$imagename);
         $data->image=$imagename;
         $data->save();
+        if ($request->has('tags')) {
+            $tagIds = $request->input('tags');
+            $data->tags()->attach($tagIds);
+        }
         return redirect('/recipe');
     }
+// WelcomeController.php
+
+public function store(Request $request)
+{
+    $recipeId = $request->input('recipe_id');
+    $data = Recipe::findOrFail($recipeId);
+    
+    if ($request->has('tags')) {
+        $tagIds = $request->input('tags');
+        $data->tags()->attach($tagIds);
+    }
+
+    return redirect()->back()->with('success', 'Tags added successfully!');
+}
+
     public function show_recipe(){
         $data = Recipe::all();
-
+        $tags = tags::all();
+        dd($tags);
+        return view('add', ['tags' => $tags]);
         return view('recipe',compact('data'));
     }
     public function delete_recipe($id){
@@ -54,7 +82,6 @@ class WelcomeController extends Controller
             $request->image->move('img',$imagename);
             $data->image=$imagename;
         }
-        dd($data);
 
         $data->save();
 
@@ -77,28 +104,3 @@ class WelcomeController extends Controller
         return view('detail', compact('recipe'));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    

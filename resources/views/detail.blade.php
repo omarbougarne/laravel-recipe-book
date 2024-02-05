@@ -48,7 +48,7 @@
                             <h3 class="text-2xl">
                                 <a href="show.html">{{$recipe->title}}</a>
                             </h3>
-                            <div class="text-xl font-bold mb-4">{{$recipe->description}}</div>
+                            <div class="text-xl font-bold mb-4">{{$recipe->recipe_main}}</div>
                         </div>
                     </div>
                     <br>
